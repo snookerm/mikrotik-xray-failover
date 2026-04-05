@@ -1,177 +1,186 @@
-# 🧩 Xray Config Generators
+# 🧩 Xray Config Generators for MikroTik
 
-В проекте доступны два генератора конфигов:
-
-- 🌐 Web-генератор (PHP)
-- 🖥 CLI-генератор (Python)
-
-Оба позволяют:
-- вставить JSON из клиента (например HAPP)
-- получить **MikroTik-совместимый `config.json`**
-- сохранить оригинальный конфиг отдельно
+[![Platform](https://img.shields.io/badge/platform-MikroTik-blue)]()
+[![Xray](https://img.shields.io/badge/Xray-VLESS%20Reality-green)]()
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)]()
+[![Status](https://img.shields.io/badge/status-stable-success)]()
 
 ---
 
-# 🌐 Web Generator (PHP)
+## 🚀 Быстрый старт
 
-📍 Файл:  
-https://github.com/snookerm/mikrotik-xray-failover/blob/main/xray-utils/xray-generator.php  
+👉 Воспользуйтесь бесплатным генератором Xray для MikroTik:  
+https://any.hayazg.net/xray-generator.php  
 
-## 📌 Как использовать
-
-1. Залей файл на свой сервер:
-```
-/xray-config-generator/xray-generator.php
-```
-
-2. Открой в браузере:
-```
-https://your-domain/xray-config-generator/xray-generator.php
-```
-
-3. Вставь JSON из клиента (HAPP / v2ray / xray)
-
-4. Нажми:
-```
-Generate config.json
-```
-
-5. Скачай файл
+Или настройте свой генератор 👇
 
 ---
 
-## ✅ Что делает
+## 📑 Содержание (TOC)
 
-- извлекает `vnext`
-- переносит:
-  - address
-  - port
-  - uuid
-  - reality настройки
-- добавляет:
-  - dokodemo-door inbound (12345)
-  - health inbound (15443)
-- сохраняет совместимость с MikroTik контейнером
+- [🧩 О проекте](#-о-проекте)
+- [⚙️ Варианты генерации](#️-варианты-генерации)
+  - [🐍 Вариант 1 — Python](#-вариант-1--python)
+  - [🌐 Вариант 2 — PHP](#-вариант-2--php)
+- [📂 Что генерируется](#-что-генерируется)
+- [🔁 Использование для failover](#-использование-для-failover)
+- [📸 Скриншоты](#-скриншоты)
+- [💡 Рекомендации](#-рекомендации)
 
 ---
 
-# 🖥 CLI Generator (Python)
+## 🧩 О проекте
 
-📍 README:  
-https://github.com/snookerm/mikrotik-xray-failover/blob/main/xray-utils/readme.md  
+Этот инструмент позволяет:
+
+✅ Преобразовать JSON из Xray клиента (например HAPP)  
+✅ Получить MikroTik-совместимый config.json  
+✅ Упростить настройку Xray контейнеров  
+✅ Подготовить конфиги для failover (multi-Xray)
+
+---
+
+## ⚙️ Варианты генерации
+
+---
+
+## 🐍 Вариант 1 — Python
 
 📍 Скрипт:  
 https://github.com/snookerm/mikrotik-xray-failover/blob/main/xray-utils/xray-generator.py  
 
----
+### 📦 Установка (Ubuntu 22.04)
 
-## 📌 Установка (Ubuntu 22.04)
+sudo mkdir -p /opt/xray-generator  
+cd /opt/xray-generator  
 
-### 1. Создать папку
-```bash
-sudo mkdir -p /opt/xray-generator
-```
+### 📥 Скачать скрипт
 
-### 2. Перейти в неё
-```bash
-cd /opt/xray-generator
-```
+wget https://raw.githubusercontent.com/snookerm/mikrotik-xray-failover/main/xray-utils/xray-generator.py  
 
-### 3. Получить скрипт
+### 🔧 Права
 
-👉 Вариант 1 (скачать с GitHub):
-```bash
-wget https://raw.githubusercontent.com/snookerm/mikrotik-xray-failover/main/xray-utils/xray-generator.py
-```
-
-👉 Вариант 2 (создать вручную):
-```bash
-nano xray-generator.py
-```
-
-### 4. Дать права на исполнение
-```bash
-chmod +x xray-generator.py
-```
+chmod +x xray-generator.py  
 
 ---
 
-## ▶️ Запуск
+### ▶️ Запуск
 
-```bash
-cd /opt/xray-generator
-./xray-generator.py
-```
+./xray-generator.py  
 
 или:
 
-```bash
-python3 xray-generator.py
-```
+python3 xray-generator.py  
 
 ---
 
-## 🧠 Как пользоваться
+### 🧠 Использование
 
 1. Запускаешь скрипт  
 2. Вставляешь JSON из клиента  
-3. Нажимаешь:
-
-```
-Ctrl + D
-```
+3. Нажимаешь Ctrl + D  
 
 ---
 
-## 📂 Результат
+### 📂 Результат
 
-Создаются 2 файла:
-
-```
-config.json                     # для MikroTik
-config_from_xray_client.json    # оригинал
-```
+config.json  
+config_from_xray_client.json  
 
 ---
 
-## ⚡ Быстрый режим (из файла)
+### ⚡ Быстрый режим
 
-```bash
-python3 xray-generator.py < client.json
-```
+python3 xray-generator.py < client.json  
 
 ---
 
-# 🔁 Использование для failover (4 сервера)
+## 🌐 Вариант 2 — PHP
 
-Повторить генерацию 4 раза и сохранить:
-
-```
-xray-configs/config.json
-xray-configs2/config.json
-xray-configs3/config.json
-xray-configs4/config.json
-```
+📍 Файл:  
+https://github.com/snookerm/mikrotik-xray-failover/blob/main/xray-utils/xray-generator.php  
 
 ---
 
-# 💡 Рекомендации
+### 📌 Установка
 
-- Не публикуйте:
-  - UUID
-  - publicKey
-  - shortId
-- Используйте `.example.json` для GitHub
-- Проверяйте config через:
-```bash
-xray -test -config config.json
-```
+Залить файл на сервер:
+
+/xray-config-generator/xray-generator.php  
 
 ---
 
-# 🚀 Итог
+### 🌍 Использование
+
+https://your-domain/xray-config-generator/xray-generator.php  
+
+---
+
+### 🧠 Как пользоваться
+
+1. Вставить JSON из клиента  
+2. Нажать Generate config.json  
+3. Скачать файл  
+
+---
+
+## 📂 Что генерируется
+
+- address  
+- port  
+- uuid  
+- reality настройки  
+- inbound dokodemo-door (12345)  
+- inbound health-check (15443)  
+
+---
+
+## 🔁 Использование для failover
+
+xray-configs/config.json  
+xray-configs2/config.json  
+xray-configs3/config.json  
+xray-configs4/config.json  
+
+---
+
+## 📸 Скриншоты
+
+Создайте папку:
+
+images/
+
+И добавьте:
+
+images/web-generator.png  
+images/cli-generator.png  
+
+---
+
+## 💡 Рекомендации
+
+❗ Не публикуйте:
+- UUID  
+- publicKey  
+- shortId  
+
+✔ Используйте example конфиги  
+
+✔ Проверяйте:
+
+xray -test -config config.json  
+
+---
+
+## ⭐ Итог
 
 | Генератор | Где использовать | Уровень |
 |----------|----------------|--------|
 | PHP      | Веб (быстро)   | ⭐⭐⭐ |
 | Python   | CLI / сервер   | ⭐⭐⭐⭐ |
+
+---
+
+## 🚀 Идея проекта
+
+👉 вставил JSON → получил config → загрузил в MikroTik → работает
