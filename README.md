@@ -9,6 +9,15 @@ Transparent Xray failover gateway for MikroTik RouterOS
 
 ---
 
+## 📚 Содержание
+
+- [Описание проекта](#-1-описание-проекта)
+- [Преднастройка](#-2-введение-и-преднастройка-routeros)
+- [Контейнеры](#-4-подготовка-флешки-и-контейнеров)
+- [Failover](#-5-failover-логика)
+
+---
+
 ## 📌 Описание
 
 Failover-прокси шлюз на MikroTik с использованием Xray (VLESS + Reality + XHTTP).
