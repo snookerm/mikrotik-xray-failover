@@ -1,13 +1,10 @@
-# mikrotik-xray-failover
-Transparent Xray failover gateway for MikroTik RouterOS
-
 # 🚀 MikroTik Xray Failover Gateway
 
 ![RouterOS](https://img.shields.io/badge/RouterOS-7.x-blue)
 ![Architecture](https://img.shields.io/badge/Architecture-ARM64-green)
 ![Xray](https://img.shields.io/badge/Xray-VLESS%20Reality-orange)
 ![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
-
+Transparent Xray failover gateway for MikroTik RouterOS
 ---
 
 ## 📌 Описание
