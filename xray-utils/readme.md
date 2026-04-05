@@ -146,14 +146,11 @@ xray-configs4/config.json
 
 ## 📸 Скриншоты
 
-Создайте папку:
+### Web генератор
+![Web Generator](../images/web-generator.png)
 
-images/
-
-И добавьте:
-
-images/web-generator.png  
-images/cli-generator.png  
+### CLI генератор
+![CLI Generator](../images/cli-generator.png)
 
 ---
 
