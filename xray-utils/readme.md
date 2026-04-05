@@ -146,10 +146,10 @@ xray-configs4/config.json
 
 ## 📸 Скриншоты
 
-### Web генератор
+### 🌐 Web Generator
 ![Web Generator](../images/web-generator.png)
 
-### CLI генератор
+### 🖥 CLI Generator
 ![CLI Generator](../images/cli-generator.png)
 
 ---
