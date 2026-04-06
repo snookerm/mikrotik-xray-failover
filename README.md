@@ -70,10 +70,12 @@ flowchart TD
 - RouterOS container subsystem
 - 4 отдельных контейнера Xray
 - 4 отдельных `veth` интерфейса
-- USB-накопитель для хранения root-dir контейнеров
-- отдельные директории с `config.json`
-- `Netwatch` для local/remote health-check
+- USB-накопитель для хранения 4 root-dir контейнеров и tmp-файлов
+- 4 отдельные директории с `config.json` в NAND (внутренней памяти) Mikrotik
+- 8 `Netwatch` для local/remote health-check-ов
+- 2 `Scheduler` для запуска `update-watch-hosts` при startup и каждые 30 минут
 - скрипт `reconcile-xray` для выбора лучшего доступного узла
+- скрипт `update-watch-hosts` для автоматическое обновление IP-адресов для Netwatch на основе доменных имён из конфигов Xray.
 
 ---
 
