@@ -1,6 +1,6 @@
 :local token "<TELEGRAM_BOT_TOKEN>"
 :local chat "<TELEGRAM_GROUP_ID>"
-:local thread "TELEGRAM_THREAD_ID"
+:local thread "<TELEGRAM_THREAD_ID>"
 
 :local idMain [/tool netwatch find where name="watch-xray-main"]
 :local idB1   [/tool netwatch find where name="watch-xray-backup1"]
