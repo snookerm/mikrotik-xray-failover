@@ -9,7 +9,7 @@
 ---
 
 ## 🚀 Быстрый запуск контейнера в MikroTik
-
+На примере контейнера xray:
 ```routeros
 /container/add file=usb1-part1/xray-images/xray-mikrotik-26.2.9-arm64.tar \
     interface=docker-xray-veth \
@@ -147,7 +147,7 @@ usb1-part1/xray-images/
 ---
 
 ## 3. Пересборка контейнера в MikroTik
-
+На примере контейнера xray:
 ```routeros
 /container/stop xray
 /container/remove xray
