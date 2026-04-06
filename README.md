@@ -87,3 +87,13 @@ flowchart TD
 
 ```routeros
 /disk format-drive usb1 file-system=ext4
+```
+Пример JSON
+
+```json
+{
+  "name": "example",
+  "version": "1.0",
+  "enabled": true
+}
+```
