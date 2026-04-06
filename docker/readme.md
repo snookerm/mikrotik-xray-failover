@@ -76,14 +76,14 @@ C:\Program Files\RedHat\Podman\
 
 Перезапустить PowerShell
 
-Проверка:
+Проверка (PowerShell):
 ```powershell
 $env:PATH -split ";"
 ```
 
 ---
 
-## 3. Инициализация Podman
+## 3. Инициализация Podman (PowerShell)
 
 ```powershell
 podman machine init
@@ -93,7 +93,7 @@ podman --version
 
 ---
 
-## 4. Сборка образа
+## 4. Сборка образа (PowerShell)
 
 ```powershell
 cd e:\xray-mikrotik
