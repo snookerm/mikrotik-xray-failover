@@ -25,7 +25,7 @@ Example for the xray container:
 
 ## Pre-built Image
 
-You can download an already built image [here](http://any.hayazg.net/xray-mikrotik-26.2.9-arm64.tar).
+You can download an already built image [here](https://any.hayazg.net/xray-mikrotik-26.2.9-arm64.tar).
 There are situations where MikroTik doesn't have access to github.com, or simply for reliability, you want to keep the image file on a USB drive in MikroTik. In that case, you need to generate the tar archive of the image yourself. Generating the image is also required when you want to customize the Image (change something in the Dockerfile or start.sh) and rebuild the image.
 
 ---
