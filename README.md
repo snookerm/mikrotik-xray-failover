@@ -272,7 +272,7 @@ set tmpdir=usb1-part1/container-tmp
 **Быстрый вариант** --- скачать готовый образ:
 
 ```bash
-wget http://any.hayazg.net/xray-mikrotik-26.2.9-arm64.tar
+wget https://any.hayazg.net/xray-mikrotik-26.2.9-arm64.tar
 ```
 
 Перенести файл на USB MikroTik:
