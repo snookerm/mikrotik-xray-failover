@@ -272,7 +272,7 @@ Detailed build instructions: [docker/readme.md](docker/readme.md)
 **Quick option** --- download a pre-built image:
 
 ```bash
-wget http://any.hayazg.net/xray-mikrotik-26.2.9-arm64.tar
+wget https://any.hayazg.net/xray-mikrotik-26.2.9-arm64.tar
 ```
 
 Transfer the file to MikroTik USB:
