@@ -55,15 +55,20 @@ RouterOS-скрипты для управления failover-логикой Xray
 **Запуск:**
 - Автоматически через Scheduler при старте роутера
 - Периодически каждые 30 минут
+- Вручную после добавления Remote Netwatch-записей:
 
-## Установка
+```routeros
+/system script run update-watch-hosts
+```
+
+## Установка скриптов
 
 Скрипты добавляются в RouterOS через:
 
 ```routeros
 /system/script
-add name=reconcile-xray source=[содержимое .rsc файла]
-add name=update-watch-hosts source=[содержимое .rsc файла]
+add name=reconcile-xray source=[содержимое файла reconcile-xray.rsc]
+add name=update-watch-hosts source=[содержимое файла update-watch-hosts.rsc]
 ```
 
 Подробная инструкция по установке и настройке: [README.md](../README.md)
