@@ -397,23 +397,61 @@ add address=192.168.0.0/16 list=RFC1918
 
 ### 5.6. Mangle-правила (Policy Routing)
 
-Перенаправление трафика клиентов из LAN в таблицу `r_to_vpn`:
+Правила перечислены в порядке приоритета (порядок важен!):
 
 ```routeros
 /ip/firewall/mangle
+# 1. Bypass RFC1918 — пропускаем трафик к частным подсетям без маркировки
+add chain=prerouting action=accept dst-address-list=RFC1918 \
+    in-interface-list=!WAN comment="Bypass RFC1918"
+
+# 2. Mark connection — маркируем TCP-соединения из LAN для VPN
+add chain=prerouting action=mark-connection new-connection-mark=to-vpn-conn \
+    passthrough=yes protocol=tcp src-address=192.168.88.0/24 \
+    connection-mark=no-mark comment="Mark TCP LAN to VPN"
+
+# 3. Mark routing — направляем маркированные соединения в таблицу r_to_vpn
 add chain=prerouting action=mark-routing new-routing-mark=r_to_vpn \
-    src-address=192.168.88.0/24 dst-address-list=!RFC1918 \
-    passthrough=yes comment="VPN routing for LAN clients"
+    passthrough=no src-address=192.168.88.0/24 connection-mark=to-vpn-conn \
+    comment="Route TCP LAN to VPN"
+
+# 4-7. Clamp MSS — корректируем MSS для каждого VETH-интерфейса
+add chain=forward action=change-mss new-mss=1360 passthrough=yes tcp-flags=syn \
+    protocol=tcp out-interface=docker-xray-veth tcp-mss=1420-65535 \
+    comment="Clamp MSS to Xray"
+
+add chain=forward action=change-mss new-mss=1360 passthrough=yes tcp-flags=syn \
+    protocol=tcp out-interface=docker-xray-veth2 tcp-mss=1420-65535 \
+    comment="Clamp MSS to Xray2"
+
+add chain=forward action=change-mss new-mss=1360 passthrough=yes tcp-flags=syn \
+    protocol=tcp out-interface=docker-xray-veth3 tcp-mss=1420-65535 \
+    comment="Clamp MSS to Xray3"
+
+add chain=forward action=change-mss new-mss=1360 passthrough=yes tcp-flags=syn \
+    protocol=tcp out-interface=docker-xray-veth4 tcp-mss=1420-65535 \
+    comment="Clamp MSS to Xray4"
 ```
 
-> **Примечание:** замените `192.168.88.0/24` на вашу LAN-подсеть. Используется `dst-address-list=!RFC1918`, чтобы трафик к частным подсетям (включая сам MikroTik) не уходил в VPN.
+> **Примечание:** замените `192.168.88.0/24` на вашу LAN-подсеть.
 
 ### 5.7. NAT для контейнеров
 
+Правила перечислены в порядке приоритета (порядок важен!):
+
 ```routeros
 /ip/firewall/nat
+# 0. Masquerade — NAT для исходящего трафика
 add chain=srcnat action=masquerade out-interface-list=WAN \
     comment="NAT for Xray containers"
+
+# 1. Bypass Xray DNS UDP — пропускаем DNS UDP-трафик от контейнеров
+add chain=dstnat action=accept protocol=udp src-address=172.18.0.0/16 \
+    dst-port=53 comment="bypass Xray DNS UDP"
+
+# 2. Bypass Xray DNS TCP — пропускаем DNS TCP-трафик от контейнеров
+add chain=dstnat action=accept protocol=tcp src-address=172.18.0.0/16 \
+    dst-port=53 comment="bypass Xray DNS TCP"
 ```
 
 ---
