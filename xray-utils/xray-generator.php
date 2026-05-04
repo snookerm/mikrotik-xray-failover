@@ -144,6 +144,25 @@ function build_mikrotik_config(array $src): array {
         ]);
     }
 
+    $policy = is_array($src['policy'] ?? null) ? $src['policy'] : [
+        'levels' => [
+            '0' => [
+                'handshake' => 4,
+                'connIdle' => 120,
+                'uplinkOnly' => 30,
+                'downlinkOnly' => 30,
+            ],
+        ],
+    ];
+    // Xray expects policy.levels as map[uint32]*Policy (JSON object).
+    // PHP coerces numeric-string keys ('0') to int (0), and json_encode
+    // then serializes such an array as a JSON array — Xray fails on unmarshal:
+    //   "cannot unmarshal array into Go struct field PolicyConfig.policy.levels".
+    // Casting to (object) forces encoding as a JSON object.
+    if (isset($policy['levels']) && is_array($policy['levels'])) {
+        $policy['levels'] = (object)$policy['levels'];
+    }
+
     return [
         'log' => [
             'loglevel' => (string)array_get($src, ['log', 'loglevel'], 'warning'),
@@ -199,16 +218,7 @@ function build_mikrotik_config(array $src): array {
             'domainStrategy' => (string)($routing['domainStrategy'] ?? 'IPIfNonMatch'),
             'rules' => $rules,
         ],
-        'policy' => is_array($src['policy'] ?? null) ? $src['policy'] : [
-            'levels' => [
-                '0' => [
-                    'handshake' => 4,
-                    'connIdle' => 120,
-                    'uplinkOnly' => 30,
-                    'downlinkOnly' => 30,
-                ],
-            ],
-        ],
+        'policy' => $policy,
     ];
 }
 
