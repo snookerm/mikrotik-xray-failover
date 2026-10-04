@@ -1,6 +1,6 @@
-FROM teddysun/xray:26.2.6
+FROM teddysun/xray:26.5.3
 
-RUN apk add --no-cache iptables
+RUN apk add --no-cache iptables-legacy || apk add --no-cache iptables
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
